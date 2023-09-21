@@ -1,0 +1,76 @@
+def insertion_sort(alist):
+ for i in range(1, len(alist)):
+ temp = alist[i]
+ j = i - 1
+ while (j >= 0 and temp < alist[j]):
+ alist[j + 1] = alist[j]
+ j = j - 1
+ alist[j + 1] = temp
+alist = input('Enter the list of numbers: ').split()
+alist = [int(x) for x in alist]
+insertion_sort(alist)
+print('Sorted list: ', end='')
+print(alist)
+
+def mergeSort(arr):
+ if len(arr) > 1:
+ # Create sub_array2 ← A[start..mid] and sub_array2 ← A[mid+1..end]
+ mid = len(arr)//2
+ sub_array1 = arr[:mid]
+ sub_array2 = arr[mid:]
+ # Sort the two halves
+ mergeSort(sub_array1)
+ mergeSort(sub_array2)
+ 
+ # Initial values for pointers that we use to keep track of where we are in each array
+ i = j = k = 0
+ # Until we reach the end of either start or end, pick larger among
+ # elements start and end and place them in the correct position in the sorted array
+ while i < len(sub_array1) and j < len(sub_array2):
+ if sub_array1[i] < sub_array2[j]:
+PYTHON PROGRAMMING LABORATORY 21CSL46
+CSE OF DEPT, SIR MVIT 17 2022-23
+ arr[k] = sub_array1[i]
+ i += 1
+ else:
+ arr[k] = sub_array2[j]
+ j += 1
+ k += 1
+ # When all elements are traversed in either arr1 or arr2,
+ # pick up the remaining elements and put in sorted array
+ while i < len(sub_array1):
+ arr[k] = sub_array1[i]
+ i += 1
+ k += 1
+ while j < len(sub_array2):
+ arr[k] = sub_array2[j]
+ j += 1
+ k += 1
+arr = input('Enter the list of numbers: ').split()
+arr = [int(x) for x in arr]
+mergeSort(arr)
+print('Sorted list: ', end='')
+print(arr)
+
+
+
+
+
+def roman2Dec(romStr):
+roman_dict ={'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+# Analyze string backwards
+romanBack = list(romStr)[::-1]
+value = 0
+# To keep track of order
+rightVal = roman_dict[romanBack[0]]
+for numeral in romanBack:
+leftVal = roman_dict[numeral]
+# Check for subtraction
+if leftVal < rightVal:
+value -= leftVal
+else:
+value += leftVal
+rightVal = leftVal
+return value
+romanStr = input("Enter a Roman Number : ")
+print(roman2Dec(romanStr))
